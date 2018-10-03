@@ -1,35 +1,53 @@
 import React, { Component } from 'react';
-import Formulario from './components/Formulario'
-
+import Formulario from './components/Formulario';
 import './App.css';
+import ExibeCep from './components/ExibeCep';
+import axios from 'axios';
 
 class App extends Component {
-
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      cep: ''
-    }
-    this.handleInput = this.handleInput.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+      erro: false,
+      estaCarregando: true,
+      dadosPostais: {}
+    };
+    this.getCep = this.getCep.bind(this);  
+    this.retornoCep = this.retornoCep.bind(this);
 
-  handleInput(e) {
-    this.setState({
-        cep : e.target.value
-    })
-
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
     
+  } 
+
+  getCep(cepInformado) {
+    axios.get(`https://viacep.com.br/ws/${cepInformado}/json/`)
+      .then(response => {
+        this.setState ({
+          estaCarregando: false,
+          dadosPostais: response.data
+        });
+      })
+      .catch(error => {
+        this.setState ({
+          erro: true
+        })
+      });
   }
 
+  retornoCep () {
+    if(this.state.erro) {
+      return "CEP INVALIDO";
+    }else if(this.state.estaCarregando) {
+      return "CARREGANDO";
+    }else {
+      return (<ExibeCep endereco={this.state.dadosPostais} />)
+    }   
+  }
+  
   render () {
     return (
       <div>
-        <Formulario handleSubmit={this.handleSubmit} handleInput={this.handleInput}/>
+        <Formulario buscaCep={this.getCep} />
+        {this.retornoCep()}
       </div>
     );
   }
