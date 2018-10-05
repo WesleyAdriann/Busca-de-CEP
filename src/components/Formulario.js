@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import Icon from '@material-ui/core/Icon';
 
 class Formulario extends Component {
     constructor(props) {
@@ -27,11 +29,19 @@ class Formulario extends Component {
 
     render() {
         return(
-            <div className="container">
-                <form onSubmit={this.handleSubmit}>
-                    <TextField id="cep" label="CEP" value={this.state.campo} type="text" placeholder="00000-000" onChange={event => this.handleInput(event.target.value)}/>
-                    <Button variant="contained" color="primary" size='small'type="submit">Enviar</Button>
-                </form>
+            <div>
+            <form onSubmit={this.handleSubmit}> 
+                <Grid container>
+                    <Grid item xs={10}>
+                        <TextField id="cep" label="CEP" fullWidth value={this.state.campo} type="text" placeholder="00000-000" onChange={event => this.handleInput(event.target.value)}/>
+                    </Grid>
+                    <Grid item xs={1}/>
+                    <Grid item xs={1}>
+                    
+                        <Button variant="extendedFab" fullWidth color="primary" size='small'type="submit">Buscar</Button>    
+                    </Grid>
+                </Grid>
+            </form>
             </div>
         );
     }

@@ -1,0 +1,21 @@
+.container {
+    position: relative;
+    top: 30px;
+}
+
+.pd {
+    padding: 10px;
+}
+
+.mt {
+    margin-top: 10px;
+}
+
+.MuiFormLabel-root-136.MuiFormLabel-disabled-138 {
+    /* color: #000 !important;  */
+}
+
+.test {
+    color: red;
+    
+}
