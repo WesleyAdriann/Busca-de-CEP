@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import Icon from '@material-ui/core/Icon';
+import MaskedInput from 'react-text-mask';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel'
+import '../css/App.css';
 
 class Formulario extends Component {
     constructor(props) {
@@ -12,6 +14,7 @@ class Formulario extends Component {
         }
         this.handleInput = this.handleInput.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.TextMaskCustom = this.TextMaskCustom.bind(this);
     }
 
     handleSubmit(event) {
@@ -27,18 +30,39 @@ class Formulario extends Component {
         });
       }
 
+    TextMaskCustom(props) {
+        const { inputRef, ...other } = props;
+      
+        return (
+          <MaskedInput
+            {...other}
+            ref={inputRef} 
+            mask={[/[1-9]/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/,]}
+            placeholderChar={'\u2000'}
+            showMask
+          />
+        );
+      }
+
     render() {
         return(
             <div>
             <form onSubmit={this.handleSubmit}> 
                 <Grid container>
                     <Grid item xs={10}>
-                        <TextField id="cep" label="CEP" fullWidth value={this.state.campo} type="text" placeholder="00000-000" onChange={event => this.handleInput(event.target.value)}/>
+                        <InputLabel style={{fontSize: '12px'}}>CEP</InputLabel>
+                        <Input id="cep"
+                            label="CEP"
+                            fullWidth value={this.state.campo}
+                            type="text"
+                            onChange={event => this.handleInput(event.target.value)}
+                            inputComponent={this.TextMaskCustom}/>
                     </Grid>
                     <Grid item xs={1}/>
                     <Grid item xs={1}>
-                    
-                        <Button variant="extendedFab" fullWidth color="primary" size='small'type="submit">Buscar</Button>    
+                        <div className="mt">
+                            <Button variant="contained" fullWidth color="primary" type="submit">Buscar</Button>    
+                        </div>
                     </Grid>
                 </Grid>
             </form>
