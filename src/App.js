@@ -76,13 +76,13 @@ class App extends Component {
   }
 
   retornoCep () {
-    if(this.state.erroCep){
+    if(this.state.estaCarregando){
       return(
-        <p align="center">CEP INVÁLIDO</p>
-      );
-    }else if(this.state.estaCarregando) {
-      return (
         <p align="center"><CircularProgress size={25}/></p>
+      );
+    }else if(this.state.erroCep) {
+      return (
+        <p align="center">CEP INVÁLIDO</p>
       );
     }else if (_.isEmpty(this.state.dadosPostais)) {
       return (
