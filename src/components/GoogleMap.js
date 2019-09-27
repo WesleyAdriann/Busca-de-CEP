@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
-import Grid from '@material-ui/core/Grid';
 
 class GoogleMap extends Component {
     render() {

@@ -10,8 +10,8 @@ import _ from 'lodash';
 import GoogleMap from './components/GoogleMap';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       erroCep: false,
       erroMap: false,
@@ -57,7 +57,7 @@ class App extends Component {
             lng: response.data.results[0].geometry.location.lng,
           });
         })
-        .catch(error => {
+        .catch(() => {
           this.setState ({
             erroMap: true,
           })

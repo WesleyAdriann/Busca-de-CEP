@@ -49,25 +49,27 @@ class Formulario extends Component {
     render() {
         return(
             <div>
-            <form onSubmit={this.handleSubmit}> 
-                <Grid container>
-                    <Grid item xs={10}>
-                        <InputLabel style={{fontSize: '12px'}}>CEP</InputLabel>
-                        <Input id="cep"
-                            label="CEP"
-                            fullWidth value={this.state.campo}
-                            type="text"
-                            onChange={event => this.handleInput(event.target.value)}
-                            inputComponent={this.TextMaskCustom}/>
+            
+                <Grid container spacing={3}>
+                    <Grid item xs={9}>
+                        <form onSubmit={this.handleSubmit} > 
+                            <InputLabel style={{fontSize: '12px'}}>CEP</InputLabel>
+                            <Input id="cep"
+                                label="CEP"
+                                fullWidth value={this.state.campo}
+                                type="text"
+                                onChange={event => this.handleInput(event.target.value)}
+                                inputComponent={this.TextMaskCustom}/>
+                        </form>
                     </Grid>
                     <Grid item xs={1}/>
-                    <Grid item xs={1}>
+                    <Grid item xs={2}>
                         <div className="mt">
-                            <Button variant="contained" fullWidth color="primary" type="submit">Buscar</Button>    
+                            <Button variant="contained" fullWidth color="primary" type="submit" onClick={this.handleSubmit}>Buscar</Button>    
                         </div>
                     </Grid>
                 </Grid>
-            </form>
+            
             </div>
         );
     }
