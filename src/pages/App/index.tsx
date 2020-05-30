@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import {
+  CircularProgress,
+} from '@material-ui/core';
 
 import { getCep } from '../../services';
 
@@ -7,7 +10,7 @@ import {
   Container,
   Form,
   Input,
-  Row,
+  Content,
 } from './style';
 
 interface CepInput {
@@ -28,9 +31,15 @@ const App: React.FC = () => {
   const requestCep = (event: React.FormEvent) => {
     event.preventDefault();
     if(cepInput.value.match(/(\d{5})-(\d{3})/g)) {
+      setIsLoading(true);
       getCep(cepInput.value)
         .then((response: object) => {
           setCepInfo(response);
+          setIsLoading(false);
+        })
+        .catch((error: object) => {
+          console.log('Erro para pegar cep, erro: ',error);
+          setIsLoading(false);
         })
     } else {
       setCepInput({
@@ -54,9 +63,10 @@ const App: React.FC = () => {
 
   return (
     <Container>
-      <Row>
+      <>
         <Form onSubmit={requestCep} >
           <Input
+            disabled={isLoading}
             error={cepInput.isError}
             helperText={cepInput.errorMessage}
             label="Informe o CEP"
@@ -66,16 +76,34 @@ const App: React.FC = () => {
           />
           <ButtonSearch
             color={cepInput.isError ? 'secondary' : 'primary'}
+            disabled={isLoading}
             disableElevation
+            type="submit"
             variant="contained"
           >
             Buscar
           </ButtonSearch>
         </Form>
-      </Row>
-      <Row>
-        { JSON.stringify(cepInfo) }
-      </Row>
+      </>
+      <>
+        <Content
+          variant="outlined"
+          isLoading={isLoading}
+        >
+          {
+            isLoading ?
+            (
+              <CircularProgress />
+            ):(
+              <>
+                {
+                  JSON.stringify(cepInfo)
+                }
+              </>
+            )
+          }
+        </Content>
+      </>
     </Container>
   );
 }
