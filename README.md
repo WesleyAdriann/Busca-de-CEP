@@ -90,7 +90,7 @@ Aplicação estará disponivel em [http://localhost:80](http://localhost:3000)
 - [Styled Components](https://www.styled-components.com)
 - [Typescript](https://www.typescriptlang.org/)
 
-## 👨‍💻 Autores
+## 👥 Autores
 - Wesley Adriann
   - Github: [wesleyadriann](https://github.com/WesleyAdriann)
   - LinkedIn: [in/wesleyadriann](https://www.linkedin.com/in/wesleyadriann/)
