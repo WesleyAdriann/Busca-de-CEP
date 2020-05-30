@@ -4,16 +4,20 @@ import {
 } from '@material-ui/core';
 import { AxiosResponse, AxiosError } from 'axios'
 
-import { getCep } from '../../services';
+import {
+  getCep,
+} from '../../services';
 
 import {
   ButtonSearch,
+  CepText,
   Container,
   Content,
   Form,
   Footer,
   Input,
   Link,
+  NoCepText,
 } from './style';
 
 interface CepInput {
@@ -23,7 +27,8 @@ interface CepInput {
 }
 
 interface CepInfo {
-  erro?: boolean
+  cep?: string;
+  erro?: boolean;
 }
 
 const App: React.FC = () => {
@@ -32,23 +37,37 @@ const App: React.FC = () => {
     isError: false,
     errorMessage: '',
   });
-  const [cepInfo, setCepInfo] = useState<CepInfo>({
-    erro: false
-  });
+  const [cepInfo, setCepInfo] = useState<CepInfo>({});
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const requestCep = (event: React.FormEvent) => {
     event.preventDefault();
+    setIsLoading(true);
+
     if(cepInput.value.match(/(\d{5})-(\d{3})/g)) {
       setIsLoading(true);
       getCep(cepInput.value)
         .then((response: AxiosResponse) => {
-          setCepInfo(response.data);
+          if(response.data.erro) {
+            setCepInput({
+              ...cepInput,
+              isError: true,
+              errorMessage: 'Cep não existe'
+            })
+            setCepInfo({});
+          } else {
+            setCepInfo(response.data);
+          }
           setIsLoading(false);
         })
         .catch((error: AxiosError) => {
           console.log('Erro para pegar cep, erro: ',error);
           setIsLoading(false);
+          setCepInput({
+            ...cepInput,
+            isError: true,
+            errorMessage: 'Ocorreu um erro para encontrar o cep, tente novamente'
+          })
         })
     } else {
       setCepInput({
@@ -56,6 +75,8 @@ const App: React.FC = () => {
         isError: true,
         errorMessage: 'Formato de cep inválido'
       })
+      setCepInfo({});
+      setIsLoading(false);
     }
   }
 
@@ -100,29 +121,32 @@ const App: React.FC = () => {
           isLoading={isLoading}
         >
           {
-            (isLoading) ?
-            (
-              <CircularProgress />
-            ):(
-              <>
-                {
-                  cepInfo.erro ?
-                  (
-                    <>
-                      Cep não existe, tente outro.
-                    </>
-                  ):
-                  (
-                    <>
-                      Cep existe
-
-                    </>
-                  )
-                }
-
-              </>
-            )
+            isLoading &&
+            <CircularProgress />
           }
+
+          {
+            !isLoading && (Object.entries(cepInfo).length ?
+              (
+                <>
+                  {
+                    Object.entries(cepInfo).map(([key, value]) => {
+                      if(value) {
+                        return (
+                          <CepText key={key}>
+                            <span>{key}</span>: {value}
+                          </CepText>
+                        )
+                      }
+                    })
+                  }
+                </>
+              ):(
+                <NoCepText>
+                  Informe o cep no campo acima
+                </NoCepText>
+              )
+            )}
         </Content>
       </>
       <>

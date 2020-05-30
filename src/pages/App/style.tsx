@@ -9,7 +9,10 @@ import { ButtonProps } from '@material-ui/core/Button'
 import { COLORS } from '../../style';
 
 export const Container = styled.div`
-  background-color: ${COLORS.lightBlue};
+  background: ${COLORS.lightBlue};
+  background: -webkit-linear-gradient(to top, ${COLORS.lightBlue}, ${COLORS.lightBlue2});
+  background: linear-gradient(to top, ${COLORS.lightBlue}, ${COLORS.lightBlue2});
+
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -40,6 +43,11 @@ export const Input = styled(TextField)`
     border-bottom-right-radius: 0 !important;
     border-top-right-radius: 0 !important;
   }
+
+  .MuiFormLabel-root {
+    background-color: ${COLORS.white};
+    border-radius: 3px;
+  }
 `
 
 export const ButtonSearch = styled(Button)`
@@ -67,11 +75,27 @@ export const Content = styled(Paper)`
   }
 `;
 
+export const CepText = styled.div`
+  margin-bottom: 0.5em;
+  transition: 0.2s;
+
+  span:first-child {
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+`;
+
+export const NoCepText = styled.div`
+  text-align: center;
+  width: 100%;
+`;
+
 export const Footer = styled.div`
   align-items: center;
   display: flex;
   height: 50px;
-`
+  justify-content: center;
+`;
 
 export const Link = styled.a`
   color: ${COLORS.black};
