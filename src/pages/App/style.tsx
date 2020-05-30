@@ -14,12 +14,21 @@ export const Container = styled.div`
   flex-direction: column;
   min-height: 100vh;
   padding: 1.5em 1em;
+
+  @media (min-width: 500px) {
+    align-items: center;
+  }
 `;
 
 
 export const Form = styled.form`
   display: flex;
   min-height: 100px;
+
+  @media (min-width: 500px) {
+    max-width: 1140px;
+    width: 75%;
+  }
 `;
 
 export const Input = styled(TextField)`
@@ -51,4 +60,29 @@ export const Content = styled(Paper)`
   flex-grow: 1;
   padding: 1em;
   word-wrap: anywhere;
+
+  @media (min-width: 500px) {
+    max-width: 1140px;
+    width: 75%;
+  }
+`;
+
+export const Footer = styled.div`
+  align-items: center;
+  display: flex;
+  height: 50px;
+`
+
+export const Link = styled.a`
+  color: ${COLORS.black};
+  text-decoration: none;
+  user-select: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:visited {
+    color: ${COLORS.black};
+  }
 `;

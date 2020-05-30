@@ -2,15 +2,18 @@ import React, { useState } from 'react';
 import {
   CircularProgress,
 } from '@material-ui/core';
+import { AxiosResponse, AxiosError } from 'axios'
 
 import { getCep } from '../../services';
 
 import {
   ButtonSearch,
   Container,
-  Form,
-  Input,
   Content,
+  Form,
+  Footer,
+  Input,
+  Link,
 } from './style';
 
 interface CepInput {
@@ -19,13 +22,19 @@ interface CepInput {
   errorMessage: string;
 }
 
+interface CepInfo {
+  erro?: boolean
+}
+
 const App: React.FC = () => {
   const [cepInput, setCepInput] = useState<CepInput>({
     value: '',
     isError: false,
     errorMessage: '',
   });
-  const [cepInfo, setCepInfo] = useState<object>({});
+  const [cepInfo, setCepInfo] = useState<CepInfo>({
+    erro: false
+  });
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const requestCep = (event: React.FormEvent) => {
@@ -33,11 +42,11 @@ const App: React.FC = () => {
     if(cepInput.value.match(/(\d{5})-(\d{3})/g)) {
       setIsLoading(true);
       getCep(cepInput.value)
-        .then((response: object) => {
-          setCepInfo(response);
+        .then((response: AxiosResponse) => {
+          setCepInfo(response.data);
           setIsLoading(false);
         })
-        .catch((error: object) => {
+        .catch((error: AxiosError) => {
           console.log('Erro para pegar cep, erro: ',error);
           setIsLoading(false);
         })
@@ -91,18 +100,48 @@ const App: React.FC = () => {
           isLoading={isLoading}
         >
           {
-            isLoading ?
+            (isLoading) ?
             (
               <CircularProgress />
             ):(
               <>
                 {
-                  JSON.stringify(cepInfo)
+                  cepInfo.erro ?
+                  (
+                    <>
+                      Cep não existe, tente outro.
+                    </>
+                  ):
+                  (
+                    <>
+                      Cep existe
+
+                    </>
+                  )
                 }
+
               </>
             )
           }
         </Content>
+      </>
+      <>
+          <Footer>
+            <Link
+              href="https://github.com/wesleyadriann"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              Wesley Adriann
+            </Link>&nbsp;-&nbsp;
+            <Link
+              href="https://github.com/WesleyAdriann/busca_de_cep"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              Busca de Cep v2
+            </Link>
+          </Footer>
       </>
     </Container>
   );
