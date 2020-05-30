@@ -101,4 +101,4 @@ Aplicação estará disponivel em [http://localhost:80](http://localhost:3000)
 
 ## 📍 URL do Projeto
 
-- [https://github.com/WesleyAdriann/react_template](https://github.com/WesleyAdriann/react_template)
+- [https://github.com/WesleyAdriann/busca_de_cep](https://github.com/WesleyAdriann/busca_de_cep)
