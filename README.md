@@ -8,9 +8,10 @@ Site de busca de cep criado utilizando React e a api ViaCep. Criado com o objeti
 
 ## 📂 Hierarquia de diretórios
 
+- **/nginx** diretório onde fica o arquivo de configuração do nginx para produção;
 - **/public** diretório onde o react injeta o javascript/typescript durante o desenvolvimento;
 - **/build** diretório criado apos executar o comando *build*, onde fica localizado os arquivos para produção;
-- **/src** diretório onde os arquivos do desenvolvimento fica localizado;
+- **/src** diretório onde os arquivos do desenvolvimento ficam localizados;
   - **/assets** diretorio onde os arquivos de fontes e imagens ficam localizados;
   - **/services** diretório onde ficam localizados o uso de serviços externos ficam localizados, como requisições HTTP;
   - **/settings** diretório onde centraliza configurações e textos importantes ficam localizadas;
@@ -51,7 +52,7 @@ Agora execute o container utilizando a imagem
 docker run -p 3000:3000 <NOME_IMAGEM>
 ```
 
-##  🖥 Deploy (Produção)
+## 🌐 Deploy (Produção)
 ### 💻 Sem Docker
 No diretório, instale as dependências
 ```bash
