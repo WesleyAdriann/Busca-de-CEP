@@ -2,7 +2,7 @@ Busca de CEP - Versão 2
 ============
 [Versão 1](https://github.com/WesleyAdriann/busca_de_cep/tree/version_1)
 
-## 📃 Descição
+## 📝 Descição
 
 Site de busca de cep criado utilizando React e a api ViaCep. Criado com o objetivo de exercitar a construção de paginas React utilizando Typescript.
 
@@ -48,7 +48,7 @@ docker image build -t <NOME_IMAGEM> .
 ```
 Agora execute o container utilizando a imagem
 ```bash
-# docker run -p <porta_pc>:<porta_coontainer> <NOME_IMAGEM>
+# docker run -p <PORTA_PC>:<PORTA_CONTAINER> <NOME_IMAGEM>
 docker run -p 3000:3000 <NOME_IMAGEM>
 ```
 
@@ -68,7 +68,7 @@ npm run build
 # se utilziar yarn
 yarn build
 ```
-Será criada uma pasta chamda /build com os arquivos. Agora insira em um servidor HTTP. [Mais informações](https://create-react-app.dev/docs/deployment/).
+Será criada uma pasta chamada /build com os arquivos. Agora insira em um servidor HTTP. [Mais informações](https://create-react-app.dev/docs/deployment/).
 
 ###  🐋 Com Docker (Recomendado)
 No diretório, crie a build da imagem Docker
@@ -78,7 +78,7 @@ docker image build -t <NOME_IMAGEM> -f DockerfileBuild .
 ```
 Agora execute o container utilizando a imagem
 ```bash
-# docker run -p <porta_pc>:<porta_coontainer> <NOME_IMAGEM>
+# docker run -p <PORTA_PC>:<PORTA_CONTAINER> <NOME_IMAGEM>
 docker run -p 80:80 <NOME_IMAGEM>
 ```
 Aplicação estará disponivel em [http://localhost:80](http://localhost:3000)
