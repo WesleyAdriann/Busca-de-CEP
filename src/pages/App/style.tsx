@@ -47,6 +47,7 @@ export const Input = styled(TextField)`
   .MuiFormLabel-root {
     background-color: ${COLORS.white};
     border-radius: 3px;
+    padding: 1px;
   }
 `
 
